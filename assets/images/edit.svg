@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="141px" height="141px" viewBox="0 0 141 141" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>streamline-icon-pencil@140x140</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Artboard" transform="translate(-1294.000000, -141.000000)" stroke="#3581B8" stroke-width="8.75">
+            <g id="streamline-icon-pencil@140x140" transform="translate(1298.000000, 145.000000)">
+                <path d="M125.441667,6.55833333 C121.428085,2.56185442 115.98379,0.335101236 110.319938,0.372957422 C104.656087,0.411787815 99.2424392,2.71204738 95.2833333,6.7625 L10.7,91.3458333 L0.375,131.625 L40.6541667,121.294167 L125.2375,36.7108333 C129.289048,32.7535164 131.590176,27.3405514 131.62901,21.6771666 C131.666871,16.0137818 129.439255,10.570152 125.441667,6.55833333 Z" id="Path"></path>
+                <line x1="92.8683333" y1="9.18333333" x2="122.816667" y2="39.1316667" id="Path"></line>
+                <line x1="10.7058333" y1="91.34" x2="40.6833333" y2="121.265" id="Path"></line>
+            </g>
+        </g>
+    </g>
+</svg>

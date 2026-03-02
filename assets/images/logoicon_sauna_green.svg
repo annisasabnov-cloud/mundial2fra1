@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>logoicon_sauna_green</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-2078.000000, -631.000000)">
+            <g id="logoicon_sauna_green" transform="translate(2078.000000, 631.000000)">
+                <circle id="Oval-Copy-2" fill="#4FB287" cx="100" cy="100" r="100"></circle>
+                <g id="streamline-icon-temperature-thermometer-up@140x140" transform="translate(74.000000, 34.000000)" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M44.125,85.9383333 L44.125,17.875 C44.125,8.21001688 36.2899831,0.375 26.625,0.375 C16.9600169,0.375 9.125,8.21001688 9.125,17.875 L9.125,85.9383333 C0.181378622,93.9941207 -2.12538316,107.10614 3.53186974,117.730619 C9.18912265,128.355098 21.3558491,133.760369 33.0321357,130.836604 C44.7084222,127.912838 52.8921689,117.411768 52.875027,105.375 C52.8591087,97.9457272 49.6763103,90.8756709 44.125,85.9383333 L44.125,85.9383333 Z" id="Path" stroke-width="8"></path>
+                    <line x1="26.625" y1="26.625" x2="26.625" y2="96.625" id="Path" stroke-width="6"></line>
+                    <path d="M17.875,105.375 C17.875,110.207492 21.7925084,114.125 26.625,114.125 C31.4574916,114.125 35.375,110.207492 35.375,105.375 C35.375,100.542508 31.4574916,96.625 26.625,96.625 C21.7925084,96.625 17.875,100.542508 17.875,105.375 Z" id="Path" stroke-width="6"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
