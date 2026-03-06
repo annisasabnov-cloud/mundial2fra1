@@ -94,12 +94,10 @@ require __DIR__ . '/../includes/header.php';
         <h3 class="heading-9"><?= t('preise.payment_heading') ?></h3>
         <p class="paragraph-7"><?= t('preise.payment_text') ?></p>
         <div class="div-block-17">
-          <img src="assets/images/twint.svg" loading="lazy" alt="" class="image-9">
           <img src="assets/images/visa.svg" loading="lazy" alt="" class="image-9">
           <img src="assets/images/mastercard.svg" loading="lazy" alt="" class="image-9">
-          <img src="assets/images/maestro.svg" loading="lazy" alt="" class="image-9">
-          <img src="assets/images/postfinance.svg" loading="lazy" alt="" class="image-9">
-          <img src="assets/images/reka.svg" loading="lazy" alt="" class="image-9">
+          <img src="assets/images/qrismastr.webp" style="height: 60px;" loading="lazy" alt="" class="image-9">
+          <img src="assets/images/gopay.png" alt="" loading="lazy" alt="" class="image-9">
         </div>
       </div>
     </div>

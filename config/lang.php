@@ -5,14 +5,14 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Determine current language
-$supported_langs = ['fr', 'de', 'en'];
+$supported_langs = ['id', 'en', 'fr'];
 
 if (isset($_GET['lang']) && in_array($_GET['lang'], $supported_langs)) {
     $_SESSION['lang'] = $_GET['lang'];
 }
 
 if (!isset($_SESSION['lang'])) {
-    $_SESSION['lang'] = 'fr'; // Default: French
+    $_SESSION['lang'] = 'id'; // Default: Indonesian
 }
 
 $CURRENT_LANG = $_SESSION['lang'];

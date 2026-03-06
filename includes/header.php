@@ -33,6 +33,7 @@ if (!isset($CURRENT_PAGE)) {
   });
   </script>
   <style>
+    /* ── Lang switcher ── */
     .lang-switcher {
       display: inline-flex;
       gap: 4px;
@@ -56,6 +57,71 @@ if (!isset($CURRENT_PAGE)) {
       background: #2a9d4e;
       color: #fff;
       border-color: #2a9d4e;
+    }
+
+    /* ── Prevent horizontal overflow globally ── */
+    body { overflow-x: hidden; }
+
+    /* ── Lang-switcher mobile: tersembunyi di desktop ── */
+    .lang-switcher-mobile {
+      display: none;
+    }
+
+    /* ══ MOBILE ONLY (≤ 767px) ══ */
+    @media (max-width: 767px) {
+      /* Task button & lang-switcher luar disembunyikan */
+      .button-task-header.w-button,
+      .lang-switcher:not(.lang-switcher-mobile) {
+        display: none !important;
+      }
+
+      /* Hamburger selalu tampil */
+      .menu-button.w-nav-button {
+        display: flex !important;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      /* Menu terbuka — fullscreen vertikal */
+      .w-nav-menu.w--open {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #fff;
+        z-index: 9999;
+        padding: 24px 0;
+        overflow-y: auto;
+        align-items: stretch;
+      }
+
+      .w-nav-menu.w--open .nav-link-2.w-nav-link {
+        display: block !important;
+        width: 100%;
+        text-align: center;
+        padding: 14px 24px;
+        font-size: 16px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      /* Lang-switcher mobile tampil di dalam menu, sejajar tengah */
+      .w-nav-menu.w--open .lang-switcher-mobile {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 24px;
+        border-top: 1px solid #f0f0f0;
+        margin-top: 8px;
+      }
+
+      .w-nav-menu.w--open .lang-switcher-mobile a {
+        padding: 6px 16px;
+        font-size: 14px;
+      }
     }
   </style>
 </head>
@@ -87,11 +153,17 @@ function lang_switch_url(string $lang): string {
       <a href="<?= nav_url_h('restaurant') ?>" class="<?= nav_class_h('restaurant') ?>"><?= t('nav.restaurant') ?></a>
       <a href="<?= nav_url_h('kontakt') ?>" class="<?= nav_class_h('kontakt') ?>"><?= t('nav.contact') ?></a>
       <a href="<?= nav_url_h('oeffnungszeiten') ?>" class="<?= nav_class_h('oeffnungszeiten') ?>"><?= t('nav.horaires') ?><br></a>
+      <!-- lang-switcher khusus mobile, di dalam nav-menu -->
+      <div class="lang-switcher lang-switcher-mobile">
+        <a href="<?= lang_switch_url('id') ?>" class="<?= current_lang() === 'id' ? 'active' : '' ?>">ID</a>
+        <a href="<?= lang_switch_url('en') ?>" class="<?= current_lang() === 'en' ? 'active' : '' ?>">EN</a>
+        <a href="<?= lang_switch_url('fr') ?>" class="<?= current_lang() === 'fr' ? 'active' : '' ?>">FR</a>
+      </div>
     </nav>
     <div class="lang-switcher">
-      <a href="<?= lang_switch_url('fr') ?>" class="<?= current_lang() === 'fr' ? 'active' : '' ?>">FR</a>
-      <a href="<?= lang_switch_url('de') ?>" class="<?= current_lang() === 'de' ? 'active' : '' ?>">DE</a>
+      <a href="<?= lang_switch_url('id') ?>" class="<?= current_lang() === 'id' ? 'active' : '' ?>">ID</a>
       <a href="<?= lang_switch_url('en') ?>" class="<?= current_lang() === 'en' ? 'active' : '' ?>">EN</a>
+      <a href="<?= lang_switch_url('fr') ?>" class="<?= current_lang() === 'fr' ? 'active' : '' ?>">FR</a>
     </div>
     <a href="<?= nav_url_h('aufgabe') ?>" class="button-task-header w-button"><?= t('nav.tache') ?></a>
     <div class="menu-button w-nav-button">
