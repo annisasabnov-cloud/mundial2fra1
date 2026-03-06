@@ -59,7 +59,7 @@ if (!isset($CURRENT_PAGE)) {
       border-color: #2a9d4e;
     }
 
-    /* ── Prevent horizontal overflow globally ── */
+    /* ── Prevent horizontal overflow globally untuk mobile ── */
     body { overflow-x: hidden; }
 
     /* ── Lang-switcher mobile: tersembunyi di desktop ── */
@@ -67,9 +67,12 @@ if (!isset($CURRENT_PAGE)) {
       display: none;
     }
 
-    /* ══ MOBILE ONLY (≤ 767px) ══ */
-    @media (max-width: 767px) {
-      /* Task button & lang-switcher luar disembunyikan */
+    /* ── Tombol tutup overlay: tersembunyi di desktop ── */
+    .nav-close-btn { display: none; }
+
+    /* ══ MOBILE ONLY (≤ 479px) — sesuai data-collapse="tiny" ══ */
+    @media (max-width: 479px) {
+      /* Task button & lang-switcher desktop disembunyikan */
       .button-task-header.w-button,
       .lang-switcher:not(.lang-switcher-mobile) {
         display: none !important;
@@ -79,36 +82,77 @@ if (!isset($CURRENT_PAGE)) {
       .menu-button.w-nav-button {
         display: flex !important;
         align-items: center;
+        justify-content: center;
         cursor: pointer;
       }
 
-      /* Menu terbuka — fullscreen vertikal */
-      .w-nav-menu.w--open {
+      /* Navbar tidak meluber ke kanan */
+      .navbar.w-nav {
+        overflow-x: hidden;
+      }
+      .container-6.w-container {
+        padding-left: 12px;
+        padding-right: 12px;
+        overflow-x: hidden;
+      }
+
+      /* ── Menu overlay mobile — dikendalikan oleh JS custom ── */
+      /* Sembunyikan nav-menu di mobile (default: ditutup) */
+      .nav-menu.w-nav-menu {
+        display: none !important;
+      }
+
+      /* Tampilkan saat .nav-open ditambahkan ke navbar */
+      .navbar.w-nav.nav-open .nav-menu.w-nav-menu {
         display: flex !important;
         flex-direction: column;
         position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
+        max-width: 100%;
         height: 100vh;
         background: #fff;
         z-index: 9999;
-        padding: 24px 0;
+        padding: 56px 0 24px;
         overflow-y: auto;
+        overflow-x: hidden;
         align-items: stretch;
+        box-sizing: border-box;
       }
 
-      .w-nav-menu.w--open .nav-link-2.w-nav-link {
+      /* Tombol tutup (×) di pojok kanan atas overlay */
+      .nav-close-btn {
+        display: none;
+        position: fixed;
+        top: 14px;
+        right: 16px;
+        z-index: 10000;
+        background: none;
+        border: none;
+        font-size: 28px;
+        line-height: 1;
+        cursor: pointer;
+        color: #333;
+      }
+      .navbar.w-nav.nav-open .nav-close-btn {
+        display: block;
+      }
+
+      .navbar.w-nav.nav-open .nav-menu.w-nav-menu .nav-link-2.w-nav-link {
         display: block !important;
         width: 100%;
         text-align: center;
         padding: 14px 24px;
         font-size: 16px;
         border-bottom: 1px solid #f0f0f0;
+        box-sizing: border-box;
+        color: #333;
+        text-decoration: none;
       }
 
-      /* Lang-switcher mobile tampil di dalam menu, sejajar tengah */
-      .w-nav-menu.w--open .lang-switcher-mobile {
+      /* Lang-switcher mobile tampil di dalam overlay */
+      .navbar.w-nav.nav-open .nav-menu.w-nav-menu .lang-switcher-mobile {
         display: flex !important;
         justify-content: center;
         align-items: center;
@@ -118,7 +162,7 @@ if (!isset($CURRENT_PAGE)) {
         margin-top: 8px;
       }
 
-      .w-nav-menu.w--open .lang-switcher-mobile a {
+      .navbar.w-nav.nav-open .nav-menu.w-nav-menu .lang-switcher-mobile a {
         padding: 6px 16px;
         font-size: 14px;
       }
@@ -160,14 +204,54 @@ function lang_switch_url(string $lang): string {
         <a href="<?= lang_switch_url('fr') ?>" class="<?= current_lang() === 'fr' ? 'active' : '' ?>">FR</a>
       </div>
     </nav>
+    <!-- Tombol tutup overlay mobile -->
+    <button class="nav-close-btn" id="navCloseBtn" aria-label="Tutup menu">&#x2715;</button>
     <div class="lang-switcher">
       <a href="<?= lang_switch_url('id') ?>" class="<?= current_lang() === 'id' ? 'active' : '' ?>">ID</a>
       <a href="<?= lang_switch_url('en') ?>" class="<?= current_lang() === 'en' ? 'active' : '' ?>">EN</a>
       <a href="<?= lang_switch_url('fr') ?>" class="<?= current_lang() === 'fr' ? 'active' : '' ?>">FR</a>
     </div>
     <a href="<?= nav_url_h('aufgabe') ?>" class="button-task-header w-button"><?= t('nav.tache') ?></a>
-    <div class="menu-button w-nav-button">
+    <div class="menu-button w-nav-button" id="navHamburger">
       <div class="icon w-icon-nav-menu"></div>
     </div>
   </div>
 </div>
+<script>
+(function() {
+  var navbar = document.querySelector('.navbar.w-nav');
+  var hamburger = document.getElementById('navHamburger');
+  var closeBtn = document.getElementById('navCloseBtn');
+  if (!navbar || !hamburger) return;
+
+  function openMenu() {
+    navbar.classList.add('nav-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    navbar.classList.remove('nav-open');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (navbar.classList.contains('nav-open')) { closeMenu(); } else { openMenu(); }
+  });
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeMenu();
+    });
+  }
+  // Tutup menu kalau klik di luar nav-menu
+  document.addEventListener('click', function(e) {
+    if (navbar.classList.contains('nav-open') && !navbar.contains(e.target)) {
+      closeMenu();
+    }
+  });
+  // Tutup menu kalau resize ke desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 479) { closeMenu(); }
+  });
+})();
+</script>
